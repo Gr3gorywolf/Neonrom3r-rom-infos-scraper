@@ -1,3 +1,5 @@
+
+<img src="https://raw.githubusercontent.com/Gr3gorywolf/Neonrom3r-rom-infos-scraper/master/neonrom3r%20scraper/logo.png"/>
 # Neonrom3r-rom-infos-scraper
 A .net core simple console application that scrap all the roms info from <a  href="https://the-eye.eu/public/rom/">the-eye.eu</a>  and <a href="https://github.com/libretro-thumbnails/libretro-thumbnails"> libretro-thumbnails </a> and then generate a json containing the info of every rom 
 
