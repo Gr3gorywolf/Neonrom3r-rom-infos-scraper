@@ -34,13 +34,12 @@ namespace neonrom3r_scraper
             for (int i = 1; i < 11; i++)
             {
                 Dictionary<string, string> InnerList = new Dictionary<string, string>();
-                var Document = new HtmlDocument();
-                Document.LoadHtml(File.ReadAllText("Boxarts/" + linkhelpers.RepoConsoles[i] + ".html"));
-                var inner = Document.DocumentNode.Descendants().Where(ax => ax.Name == "a");
+                var arch=File.ReadAllText("BoxartsInfos/" + linkhelpers.ThumbnailsConsoles[i] + ".txt");
+                var names = arch.Split("\n");
                 List<string> nombres = new List<string>();
-                foreach (var xd in inner)
+                foreach (var xd in names)
                 {
-                    var currentname = xd.InnerText.Replace("\r\n           ", "");
+                    var currentname = xd;
                     var normalizedname = scraper.normalizename(Path.GetFileNameWithoutExtension(currentname));
                     nombres.Add(currentname);
                     if (!InnerList.ContainsKey(normalizedname))
@@ -87,19 +86,20 @@ namespace neonrom3r_scraper
 
 
 
-                if (iscompletedata) { 
-                if (!Directory.Exists(linkhelpers.RepoConsoles[i]))
-                    Directory.CreateDirectory(linkhelpers.RepoConsoles[i]);
-
-                var infos = scraper.GetRomsInfos(i, imgmap);
-                foreach (var inf in infos)
+                if (iscompletedata)
                 {
-                    var archi2 = File.CreateText(linkhelpers.RepoConsoles[i] + "/" + inf.Name + ".json");
-                    archi2.Write(JsonConvert.SerializeObject(inf));
-                    archi2.Close();
+                    if (!Directory.Exists(linkhelpers.RepoConsoles[i]))
+                        Directory.CreateDirectory(linkhelpers.RepoConsoles[i]);
+
+                    var infos = scraper.GetRomsInfos(i, imgmap);
+                    foreach (var inf in infos)
+                    {
+                        var archi2 = File.CreateText(linkhelpers.RepoConsoles[i] + "/" + inf.Name + ".json");
+                        archi2.Write(JsonConvert.SerializeObject(inf));
+                        archi2.Close();
 
 
-                }
+                    }
                 }
                 ////////////////////
             }

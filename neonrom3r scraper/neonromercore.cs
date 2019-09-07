@@ -29,8 +29,12 @@ namespace neonrom3r_scraper
             string normalized = RemoveLanguajes(name)
                    .ToLower()
                    .Replace("-", "")
+                   .Replace("(", "")
+                   .Replace(")", "")
                    .Replace(" ", "")
                    .Replace("_", "")
+                   .Replace("the", "")
+                   .Replace(",", "")
                    .Replace("#nes", "")
                    .Replace("#snes", "")
                    .Replace("v1.001", "")
@@ -118,18 +122,28 @@ namespace neonrom3r_scraper
                 string purename =RemoveLanguajes( normalizename(name));
                 string portrait = linkhelpers.ThumbnailsBaseurl + linkhelpers.ThumbnailsConsoles[Convert.ToInt32(console)] + linkhelpers.ThumbnailFolder;
                 string region = getregion(name);
-                if (!imgmap.ContainsKey(purename))
+
+
+                //evaluate that the matching characters are at least the 50% 
+                var results = imgmap.Where(ax => {
+                    return ax.Key.Contains(purename);
+
+                    }).ToList();
+
+
+                if (results.Count==0)
                 { 
                     portrait +=  name + ".png";
+                   
                   
                 }
                 else
                 {
                     foundcount++;
-                    portrait += imgmap[purename];
+                    portrait += results[0].Value;
                 }
                 string infolink = linkhelpers.InfoRepoBaseUrl + linkhelpers.RepoConsoles[console] + "/" + name.Trim() + ".json";
-                if (!infolink.EndsWith("/") && name.Trim()!="" && !infolink.StartsWith(".") && !infolink.EndsWith(".txt") && imgmap.ContainsKey(purename))
+                if (!infolink.EndsWith("/") && name.Trim()!="" && !infolink.StartsWith(".") && !infolink.EndsWith(".txt") && results.Count>0)
                 {
                 InnerList.Add(new models.romsdata {
                     InfoLink = infolink,
@@ -169,20 +183,26 @@ namespace neonrom3r_scraper
                 string name = clearname(Path.GetFileNameWithoutExtension(Anchortexts[i].Attributes["href"].Value), console);
                 string infolink = Anchortexts[i].Attributes["href"].Value;
                 string purename = RemoveLanguajes(normalizename(name));
-                string portrait = linkhelpers.ThumbnailsBaseurl + linkhelpers.ThumbnailsConsoles[Convert.ToInt32(console)] + linkhelpers.ThumbnailFolder; 
-                if (!imgmap.ContainsKey(purename))
+                string portrait = linkhelpers.ThumbnailsBaseurl + linkhelpers.ThumbnailsConsoles[Convert.ToInt32(console)] + linkhelpers.ThumbnailFolder;
+
+
+                var results = imgmap.Where(ax => {
+                    return ax.Key.Contains(purename);
+                }).ToList();
+
+                if (results.Count == 0)
                     portrait +=  name + ".png";
                 else
                 {
                     foundcount++;
-                    portrait += imgmap[purename];
+                    portrait += results[0].Value;
                  
                 }
                 string filesize = Infotexts[i].InnerText.ToString().Split("\r\n")[0].Split(':')[1].Substring(2).Trim();
                 string region = getregion(name);
 
 
-                if (!infolink.EndsWith("/") && name.Trim() != "" && !infolink.StartsWith(".") && !infolink.EndsWith(".txt") && imgmap.ContainsKey(purename))
+                if (!infolink.EndsWith("/") && name.Trim() != "" && !infolink.StartsWith(".") && !infolink.EndsWith(".txt") && results.Count>0)
                 {
 
                     InnerList.Add(new models.rominfo
