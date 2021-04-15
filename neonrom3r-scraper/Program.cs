@@ -19,7 +19,7 @@ namespace neonrom3r_scraper
             CompileImages();
             // will read the parsed images json and then will parse with the datata extracted from 
             //the-eye.eu
-            //compiledata(true);
+            CompileRomData(false);
 
 
 
@@ -40,11 +40,11 @@ namespace neonrom3r_scraper
             foreach (var consoleKey in ConsolesConstants.ConsoleSlugs.Keys)
             {
                 Dictionary<string, string> InnerList = new Dictionary<string, string>();
-                var arch = File.ReadAllText("BoxartsInfos/" + ConsolesConstants.ThumbnailsConsoles[consoleKey] + ".txt");
+                var arch = File.ReadAllText("../../../BoxartsInfos/" + ConsolesConstants.ThumbnailsConsoles[consoleKey] + ".txt");
                 var names = arch.Split("\n");
                 foreach (var name in names)
                 {
-                    var currentname = name;
+                    var currentname = name.Replace("\r","");
                     var normalizedname = ExtractionHelpers.NormalizeName(Path.GetFileNameWithoutExtension(currentname));
                     if (!InnerList.ContainsKey(normalizedname))
                         InnerList.Add(normalizedname, currentname);
@@ -53,7 +53,7 @@ namespace neonrom3r_scraper
                     outputFile.Write(JsonConvert.SerializeObject(InnerList));
                     outputFile.Close();
                 }
-                Console.WriteLine(ConsolesConstants.ConsoleSlugs[consoleKey] + "extracted!");
+                Console.WriteLine(ConsolesConstants.ConsoleSlugs[consoleKey] + " portraits extracted!");
             }
 
 
@@ -73,6 +73,7 @@ namespace neonrom3r_scraper
             List<IRomScraper> scrapers = new List<IRomScraper>()
             {
                 new TheEyeScraper(),
+                new SquidProxyScraper()
 
             };
 

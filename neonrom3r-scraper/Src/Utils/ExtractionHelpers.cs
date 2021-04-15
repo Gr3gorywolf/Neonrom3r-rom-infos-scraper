@@ -1,6 +1,8 @@
 ﻿using neonrom3r_scraper.Src.Enums;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -32,7 +34,7 @@ namespace neonrom3r_scraper.Src.Utils
                   .Replace("v1.005", "")
                   .Replace("v1.006", "")
                   .Replace("v1.007", "")
-                  .Replace("v1.008", "")
+                  .Replace("v1.008", "") 
                  ;
 
 
@@ -74,6 +76,51 @@ namespace neonrom3r_scraper.Src.Utils
             else
                 return "----";
         }
+
+        //extract the name of the rom  from file name
+        public static string ExtractName(string romName, int console)
+        {
+            return ClearName(Path.GetFileNameWithoutExtension(romName), console);
+        }
+
+        //Extracts the thumbnail from the rom name and a map of <normalizedName,imageUrl>
+        public static string ExtractThumbnail(int console, string romName, Dictionary<string, string> imageMap)
+        {
+            string portrait = Constants.ThumbnailsBaseurl + ConsolesConstants.ThumbnailsConsoles[Convert.ToInt32(console)] + Constants.ThumbnailFolder;
+            string normalizedName = ExtractionHelpers.RemoveLanguajes(ExtractionHelpers.NormalizeName(romName));
+            var results = imageMap.Where(image =>
+            {
+                return image.Key.Contains(normalizedName);
+
+            }).ToList();
+            if (results.Count == 0)
+            {
+                portrait = "";
+            }
+            else
+            {
+                portrait += results[0].Value;
+            }
+            return portrait;
+        }
+
+        //converts file size in bytes to display size
+       public static string ExtractSize(long bytes)
+        {
+            var size = (bytes / 1024f) / 1024f;
+            if (size < 1024)
+            {
+                return size + " M";
+            }
+            else
+            {
+                return size/1024  + " G";
+            }
+        }
+
+
+
+
         //it get the filename without extensions or weird  characters
         public static string ClearName(string Name, int console)
         {
