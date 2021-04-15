@@ -14,14 +14,6 @@ namespace neonrom3r_scraper
 {
     public class neonromerscraper
     {
-
-        
-
-
-
-
-
-
         //it regularize the name to have better results after parse the images names with the roms names
         //ex Pokemon red (U) will be pokemonred by this way is more accurate to find the corresponding portrait based on the name
         public string normalizename(string name) {
@@ -96,7 +88,6 @@ namespace neonrom3r_scraper
                     InnerName = InnerName.Substring(6);
               
             }
-
             return InnerName ;
         }
 
@@ -156,11 +147,7 @@ namespace neonrom3r_scraper
             }
             Console.WriteLine(foundcount + " Portadas encontradas de " + Anchortexts.Count+"   "+(Anchortexts.Count-foundcount)+"Portadas no encotradas");
             Console.WriteLine("50%");
-
-
-
             return InnerList;
-
         }
 
         //it gets all the roms that are available for that console and parse its information to get the info about that rom
@@ -178,18 +165,13 @@ namespace neonrom3r_scraper
             int foundcount = 0;
             for (int i = 0; i < Anchortexts.Count; i++)
             {
-
-             
                 string name = clearname(Path.GetFileNameWithoutExtension(Anchortexts[i].Attributes["href"].Value), console);
                 string infolink = Anchortexts[i].Attributes["href"].Value;
                 string purename = RemoveLanguajes(normalizename(name));
                 string portrait = linkhelpers.ThumbnailsBaseurl + linkhelpers.ThumbnailsConsoles[Convert.ToInt32(console)] + linkhelpers.ThumbnailFolder;
-
-
                 var results = imgmap.Where(ax => {
                     return ax.Key.Contains(purename);
                 }).ToList();
-
                 if (results.Count == 0)
                     portrait +=  name + ".png";
                 else
@@ -200,11 +182,8 @@ namespace neonrom3r_scraper
                 }
                 string filesize = Infotexts[i].InnerText.ToString().Split("\r\n")[0].Split(':')[1].Substring(2).Trim();
                 string region = getregion(name);
-
-
                 if (!infolink.EndsWith("/") && name.Trim() != "" && !infolink.StartsWith(".") && !infolink.EndsWith(".txt") && results.Count>0)
                 {
-
                     InnerList.Add(new models.rominfo
                     {
                         DownloadLink = linkhelpers.TheeyeBaseurl + linkhelpers.TheeyeConsoles[Convert.ToInt32(console)] + infolink,
@@ -215,21 +194,13 @@ namespace neonrom3r_scraper
                         Console = ((Enums.Consola) console).ToString().Replace('_', ' ')
                        
                     });
-
                 }
             }
             Console.WriteLine(foundcount + " Portadas encontradas de " + Anchortexts.Count + "   " + (Anchortexts.Count - foundcount) + "Portadas no encotradas");
             Console.WriteLine(" 100%");
-
-
-
             return InnerList;
 
         }
-
-
-
-
     }
 
     public class Enums {
@@ -246,12 +217,11 @@ namespace neonrom3r_scraper
             Sega_Dreamcast = 10
 
         };
-
-
     }
 
     //is used to do the GET request more easier and clear
-    public class linkhelpers {
+    public class linkhelpers
+    {
         public const string TheeyeBaseurl = "https://the-eye.eu/public/rom/";
         public const string ThumbnailsBaseurl = "https://raw.githubusercontent.com/libretro-thumbnails/";
         public const string ThumbnailFolder = "/master/Named_Boxarts/";
@@ -298,13 +268,10 @@ namespace neonrom3r_scraper
                 { 8,"NDS" },
                 { 9,"Genesis" },
                 { 10,"Dreamcast" },
-
-
+                { 11,"PSP"},
+                {12,"Gamecube"},
+                {13,"PS2" }
         };
-
-
-
-
     }
     //data modeling. the rominfo is used to an individual rom and the romsdata for collections of roms
     public class models {

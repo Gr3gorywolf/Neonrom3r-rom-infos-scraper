@@ -15,7 +15,7 @@ namespace neonrom3r_scraper
             compileimages();
             // will read the parsed images json and then will parse with the datata extracted from 
             //the-eye.eu
-            compiledata(true);
+            //compiledata(true);
 
 
          
@@ -23,6 +23,8 @@ namespace neonrom3r_scraper
             
             
         }
+
+
         //it get all the images and generate the images based of html data that is in boxarts folder
         //also this method creates a json that have an array of objects that containes the following format
         // [{<normalized name>:<libretroportraits portrait name>}]
