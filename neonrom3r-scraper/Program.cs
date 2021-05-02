@@ -19,7 +19,7 @@ namespace neonrom3r_scraper
             CompileImages();
             // will read the parsed images json and then will parse with the datata extracted from 
             //the-eye.eu
-            CompileRomData(false);
+            CompileRomData();
 
 
 
@@ -67,7 +67,7 @@ namespace neonrom3r_scraper
          and also it will create a folder called data that will contain jsons with  all infos of every game of the console
         
              */
-        public static void CompileRomData(bool writeIndividualRoms)
+        public static void CompileRomData()
         {
 
             List<IRomScraper> scrapers = new List<IRomScraper>()
@@ -86,7 +86,7 @@ namespace neonrom3r_scraper
                 var scraper = scrapers.Where((scr) => scr.HasConsoleRoms(consoleKey)).FirstOrDefault();
                 if (scraper == null)
                 {
-                    Console.WriteLine("No hay scraper para roms de: " + ConsolesConstants.ConsoleSlugs[consoleKey]);
+                    Console.WriteLine("No scraper found for: " + ConsolesConstants.ConsoleSlugs[consoleKey]);
                 }
                 else
                 {
@@ -95,23 +95,10 @@ namespace neonrom3r_scraper
                 JsonConvert
                 .DeserializeObject<Dictionary<string, string>>(File.ReadAllText("Boxartslist/" + console + ".json"));
 
-                    Console.WriteLine("Obteniendo datos de:" + console);
+                    Console.WriteLine("Getting rom infos for:" + console);
                     var romsDataFile = File.CreateText("Data/" + console + ".json");
                     romsDataFile.Write(JsonConvert.SerializeObject(scraper.GetRomsData(consoleKey, imgmap)));
                     romsDataFile.Close();
-                    if (writeIndividualRoms)
-                    {
-                        if (!Directory.Exists(console))
-                            Directory.CreateDirectory(console);
-
-                        var infos = scraper.GetRomsInfos(consoleKey, imgmap);
-                        foreach (var inf in infos)
-                        {
-                            var romInfoFile = File.CreateText(console + "/" + inf.Name + ".json");
-                            romInfoFile.Write(JsonConvert.SerializeObject(inf));
-                            romInfoFile.Close();
-                        }
-                    }
                 }
             }
         }

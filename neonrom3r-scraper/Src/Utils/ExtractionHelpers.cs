@@ -10,8 +10,24 @@ namespace neonrom3r_scraper.Src.Utils
 {
     class ExtractionHelpers
     {
-        //it regularize the name to have better results after parse the images names with the roms names
-        //ex Pokemon red (U) will be pokemonred by this way is more accurate to find the corresponding portrait based on the name
+
+        public static bool IsNameValid(string romName)
+        {
+            if (romName.Contains("../"))
+                return false;
+            if (romName.ToLower().Contains("parent directory"))
+                return false;
+            if (romName.Trim().Length == 0)
+                return false;
+            return true;
+        }
+        /// <summary>
+        ///it regularize the name to have better results after parse the images names with the roms names \n
+        ///ex Pokemon red (U) will be pokemonred by this way is more accurate to find the corresponding portrait based on the name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+
         public static string NormalizeName(string name)
         {
 
@@ -77,6 +93,13 @@ namespace neonrom3r_scraper.Src.Utils
                 return "----";
         }
 
+        // extract the size of the rom  from file name
+        public static string ExtractSize(string romName)
+        {
+            return romName.Split("\r\n")[0].Split(':')[1].Substring(2).Trim();
+        }
+
+
         //extract the name of the rom  from file name
         public static string ExtractName(string romName, int console)
         {
@@ -84,6 +107,7 @@ namespace neonrom3r_scraper.Src.Utils
         }
 
         //Extracts the thumbnail from the rom name and a map of <normalizedName,imageUrl>
+        //if no portrait is found it will return null
         public static string ExtractThumbnail(int console, string romName, Dictionary<string, string> imageMap)
         {
             string portrait = Constants.ThumbnailsBaseurl + ConsolesConstants.ThumbnailsConsoles[Convert.ToInt32(console)] + Constants.ThumbnailFolder;
@@ -95,12 +119,13 @@ namespace neonrom3r_scraper.Src.Utils
             }).ToList();
             if (results.Count == 0)
             {
-                portrait = "";
+                portrait = null;
             }
             else
             {
                 portrait += results[0].Value;
             }
+
             return portrait;
         }
 

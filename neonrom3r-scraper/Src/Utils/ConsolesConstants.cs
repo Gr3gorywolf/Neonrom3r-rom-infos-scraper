@@ -26,37 +26,37 @@ namespace neonrom3r_scraper.Src.Utils
         //SquidProxyConsoles consoles url
         public static Dictionary<int, string> SquidProxyConsoles = new Dictionary<int, string>()
         {
-                { (int)Consoles.Nintendo_DS,"Nintendo%20DS/" },
+               /* { (int)Consoles.Nintendo_DS,"Nintendo%20DS/" },
                 { (int)Consoles.Playstation2,"Sony%20Playstation%202/NTSC-U/" },
-                { (int)Consoles.NintendoGamecube,"Nintendo%20Gamecube/NTSC-U/" },
+                { (int)Consoles.NintendoGamecube,"Nintendo%20Gamecube/NTSC-U/" },*/
         };
 
         //thumbnails files
         public static Dictionary<int, string> ThumbnailsConsoles = new Dictionary<int, string>()
         {
-                { (int)Consoles.GameBoy,"Nintendo-Game_Boy" },
-                { (int)Consoles.GameBoyAdvance,"Nintendo-Game_Boy_Advance" },
-                { (int)Consoles.GameBoyColor,"Nintendo-Game_Boy_Color" },
-                { (int)Consoles.Nintendo,"Nintendo-Nintendo_Entertainment_System" },
-                { (int)Consoles.SuperNintendo,"Nintendo-Super_Nintendo_Entertainment_System" },
-                { (int)Consoles.Nintendo64,"Nintendo-Nintendo_64" },
-                { (int)Consoles.Playstation,"Sony-PlayStation" },
-                { (int)Consoles.Nintendo_DS,"Nintendo-Nintendo_DS" },
-                { (int)Consoles.Sega_Genesis,"Sega-Mega_Drive_Genesis" },
-                { (int)Consoles.Sega_Dreamcast,"Sega-Dreamcast" },
-                { (int)Consoles.Psp,"Sony-Psp" },
-                { (int)Consoles.NintendoGamecube,"Nintendo-Gamecube" },
-                { (int)Consoles.Playstation2,"Sony-Playstation2" },
+                { (int)Consoles.GameBoy,"Nintendo_-_Game_Boy" },
+                { (int)Consoles.GameBoyAdvance,"Nintendo_-_Game_Boy_Advance" },
+                { (int)Consoles.GameBoyColor,"Nintendo_-_Game_Boy_Color" },
+                { (int)Consoles.Nintendo,"Nintendo_-_Nintendo_Entertainment_System" },
+                { (int)Consoles.SuperNintendo,"Nintendo_-_Super_Nintendo_Entertainment_System" },
+                { (int)Consoles.Nintendo64,"Nintendo_-_Nintendo_64" },
+                { (int)Consoles.Playstation,"Sony_-_PlayStation" },
+                { (int)Consoles.Nintendo_DS,"Nintendo_-_Nintendo_DS" },
+                { (int)Consoles.Sega_Genesis,"Sega_-_Mega_Drive_-_Genesis" },
+                { (int)Consoles.Sega_Dreamcast,"Sega_-_Dreamcast" },
+                { (int)Consoles.NintendoGamecube,"Nintendo_-_GameCube" },
+                { (int)Consoles.Playstation2,"Sony_-_PlayStation_2" },
+                { (int)Consoles.Psp,"Sony_-_PlayStation_Portable" },
         };
 
         //slugs
         public static Dictionary<int, string> ConsoleSlugs = new Dictionary<int, string>()
         {
+                { (int)Consoles.SuperNintendo,"SNES" },
+                { (int)Consoles.Nintendo,"NES" },
                 { (int)Consoles.GameBoy,"GB" },
                 { (int)Consoles.GameBoyAdvance,"GBA" },
                 { (int)Consoles.GameBoyColor,"GBC" },
-                { (int)Consoles.Nintendo,"NES" },
-                { (int)Consoles.SuperNintendo,"SNES" },
                 { (int)Consoles.Nintendo64,"N64" },
                 { (int)Consoles.Playstation,"PSX" },
                 { (int)Consoles.Nintendo_DS,"NDS" },
