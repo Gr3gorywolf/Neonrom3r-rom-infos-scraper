@@ -14,8 +14,18 @@ namespace neonrom3r_scraper.Src.Scrapers
     {
         public bool HasConsoleRoms(int console)
         {
-            return ConsolesConstants.SquidProxyConsoles.ContainsKey(console);
+            return GetConsolesLinks().ContainsKey(console);
         }
+        public Dictionary<int, string> GetConsolesLinks()
+        {
+            return new Dictionary<int, string>()
+            {
+                /* { (int)Consoles.Nintendo_DS,"Nintendo%20DS/" },
+                 { (int)Consoles.Playstation2,"Sony%20Playstation%202/NTSC-U/" },
+                 { (int)Consoles.NintendoGamecube,"Nintendo%20Gamecube/NTSC-U/" },*/
+            };
+        }
+
         public List<RomData> GetRomsData(int console, Dictionary<string, string> imageMap = null)
         {
             List<RomData> InnerList = new List<RomData>();
@@ -24,7 +34,7 @@ namespace neonrom3r_scraper.Src.Scrapers
 
 
             var document = new HtmlWeb();
-            var html = document.LoadFromWebAsync(Constants.SquidProxyBaseurl + ConsolesConstants.SquidProxyConsoles[Convert.ToInt32(console)]).Result;
+            var html = document.LoadFromWebAsync(GetBasePath() + GetConsolesLinks()[Convert.ToInt32(console)]).Result;
             var container = html.DocumentNode.Descendants().Where(ax => ax.Name == "tbody").ToList();
             var children = container[0].ChildNodes.Where((node) => node.Name == "tr").ToList();
             int foundCount = 0;
@@ -45,12 +55,12 @@ namespace neonrom3r_scraper.Src.Scrapers
                     var name = ExtractionHelpers.ExtractName(link, console);
                     var thumbnail = ExtractionHelpers.ExtractThumbnail(console, name, imageMap);
                     string region = ExtractionHelpers.ExtractRegion(name);
-                    if(thumbnail != null)
+                    if (thumbnail != null)
                     {
                         foundCount++;
                         InnerList.Add(new RomData
                         {
-                             Console = ((Enums.Consoles)console).ToString().Replace('_', ' '),
+                            Console = ((Enums.Consoles)console).ToString().Replace('_', ' '),
 
                             Name = name,
                             Portrait = thumbnail,
@@ -61,6 +71,11 @@ namespace neonrom3r_scraper.Src.Scrapers
             }
             Console.WriteLine(foundCount + " Portraits found of " + children.Count + " Roms   -> " + (children.Count - foundCount) + "Portraits not found");
             return InnerList;
+        }
+
+        public string GetBasePath()
+        {
+            return "https://www.squid-proxy.xyz/Games/";
         }
     }
 }

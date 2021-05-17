@@ -7,29 +7,8 @@ namespace neonrom3r_scraper.Src.Utils
 {
     class ConsolesConstants
     {
-
-        //the-eye consoles url
-        public static Dictionary<int, string> TheeyeConsoles = new Dictionary<int, string>()
-        {
-                { (int)Consoles.GameBoy,"Nintendo%20Gameboy/" },
-                { (int)Consoles.GameBoyAdvance,"Nintendo%20Gameboy%20Advance/" },
-                { (int)Consoles.GameBoyColor,"Nintendo%20Gameboy%20Color/" },
-                { (int)Consoles.Nintendo,"NES/" },
-                { (int)Consoles.SuperNintendo,"SNES/" },
-                { (int)Consoles.Nintendo64,"Nintendo%2064/Roms/" },
-                { (int)Consoles.Playstation,"Playstation/Games/NTSC/" },
-               // { (int)Consoles.Nintendo_DS,"Nintendo%20DS/" },
-                {(int)Consoles.Sega_Genesis,"Sega%20Genesis/" },
-                { (int)Consoles.Sega_Dreamcast,"Sega%20Dreamcast/" },
-        };
-
-        //SquidProxyConsoles consoles url
-        public static Dictionary<int, string> SquidProxyConsoles = new Dictionary<int, string>()
-        {
-               /* { (int)Consoles.Nintendo_DS,"Nintendo%20DS/" },
-                { (int)Consoles.Playstation2,"Sony%20Playstation%202/NTSC-U/" },
-                { (int)Consoles.NintendoGamecube,"Nintendo%20Gamecube/NTSC-U/" },*/
-        };
+         
+         
 
         //thumbnails files
         public static Dictionary<int, string> ThumbnailsConsoles = new Dictionary<int, string>()

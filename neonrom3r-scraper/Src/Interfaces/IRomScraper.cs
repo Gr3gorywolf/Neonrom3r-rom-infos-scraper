@@ -7,6 +7,9 @@ namespace neonrom3r_scraper.Src.Interfaces
 {
     interface IRomScraper
     {
+        Dictionary<int, string> GetConsolesLinks();
+
+        string GetBasePath();
 
         bool HasConsoleRoms(int console);
         //it should return all roms available for a specific console

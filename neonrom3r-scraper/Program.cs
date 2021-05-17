@@ -73,7 +73,7 @@ namespace neonrom3r_scraper
             List<IRomScraper> scrapers = new List<IRomScraper>()
             {
                 new TheEyeScraper(),
-                new SquidProxyScraper()
+                new TheRomDepotScraper(),
 
             };
 
