@@ -21,10 +21,20 @@ namespace neonrom3r_scraper.Src.Scrapers
         {
             return new Dictionary<int, string>()
             {
-                 { (int)Consoles.Nintendo_DS,"Nintendo%20DS/Europe/" },
-                  { (int)Consoles.NintendoGamecube,"Nintendo%20Gamecube/US/" },
-                    { (int)Consoles.Psp,"Sony%20Playstation%20Portable/US/" },
-                    { (int)Consoles.Playstation2,"Sony%20Playstation%202/US/" },
+
+                { (int)Consoles.GameBoy,"Nintendo%20Game%20Boy/US/" },
+                { (int)Consoles.GameBoyAdvance,"Nintendo%20Game%20Boy%20Advance/Europe/" },
+                { (int)Consoles.GameBoyColor,"Nintendo%20Game%20Boy%20Color/US" },
+                { (int)Consoles.Nintendo,"Nintendo%20Entertainment%20System/US/" },
+                { (int)Consoles.SuperNintendo,"Nintendo%20SNES/US" },
+                { (int)Consoles.Nintendo64,"Nintendo%2064/US/" },
+                { (int)Consoles.Playstation,"Sony%20Playstation/US/" },
+                { (int)Consoles.Sega_Genesis,"Sega%20Mega%20Drive%20-%20Genesis/US/" },
+                { (int)Consoles.Sega_Dreamcast,"Sega%20Dreamcast/US/" },
+                { (int)Consoles.Nintendo_DS,"Nintendo%20DS/Europe/" },
+                { (int)Consoles.NintendoGamecube,"Nintendo%20Gamecube/US/" },
+                { (int)Consoles.Psp,"Sony%20Playstation%20Portable/US/" },
+                { (int)Consoles.Playstation2,"Sony%20Playstation%202/US/" },
 
             };
         }
