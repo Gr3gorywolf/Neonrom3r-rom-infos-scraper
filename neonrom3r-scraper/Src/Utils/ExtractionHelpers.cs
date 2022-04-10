@@ -38,6 +38,7 @@ namespace neonrom3r_scraper.Src.Utils
                    .Replace(")", "")
                    .Replace(" ", "")
                    .Replace("_", "")
+                   .Replace("_-_","")
                    .Replace("the", "")
                    .Replace(",", "")
                    .Replace("#nes", "")

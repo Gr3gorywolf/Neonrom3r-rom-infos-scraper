@@ -25,9 +25,10 @@ namespace neonrom3r_scraper.Src.Scrapers
                 { (int)Consoles.SuperNintendo,"SNES/" },
                 { (int)Consoles.Nintendo64,"Nintendo%2064/Roms/" },
                 { (int)Consoles.Playstation,"Playstation/Games/NTSC/" },
-               // { (int)Consoles.Nintendo_DS,"Nintendo%20DS/" },
-                {(int)Consoles.Sega_Genesis,"Sega%20Genesis/" },
-                { (int)Consoles.Sega_Dreamcast,"Sega%20Dreamcast/" },
+                { (int)Consoles.Psp,"Playstation%20Portable/ISO/" },
+                { (int)Consoles.Nintendo_DS,"Nintendo%20DS/" },
+                //{ (int)Consoles.Sega_Genesis,"Sega%20Genesis/" },
+                //{ (int)Consoles.Sega_Dreamcast,"Sega%20Dreamcast/" },
         };
         }
 
